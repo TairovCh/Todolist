@@ -30,6 +30,16 @@
     }
 },
 {
+    "model": "webapp.task",
+    "pk": 21,
+    "fields": {
+        "title": "тест",
+        "status": "new",
+        "deadline": "2022-11-08",
+        "description": "вывывывыв"
+    }
+},
+{
     "model": "auth.user",
     "pk": 1,
     "fields": {
