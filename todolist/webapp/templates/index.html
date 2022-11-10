@@ -8,14 +8,14 @@
     <title>To Do List</title>
 </head>
 <body>
-<a href="create/">Новая задача</a>
+<a href="{% url 'cteate_task %'}">Новая задача</a>
     <h1>To Do List</h1>
 
     {% for task in tasks %}
-        <h3>Название: <a href="/task/{{ task.pk }}/">{{ task.title }}</a></h3>
+        <h3>Название: <a href="{% url 'task_view' task.pk %}/">{{ task.title }}</a></h3>
         <p>Статус: {{ task.get_status_display }}</p>
         <p>Дата выполнения: {{ task.deadline|date:"d.m.y"}}</p>
-        <form action="/?id={{ task.id }}" method="POST">
+        <form action="{% url 'index' %}?id={{ task.id }}" method="POST">
             {% csrf_token %}
             <input type="submit" value="delete">
         </form>

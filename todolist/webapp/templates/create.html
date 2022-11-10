@@ -21,12 +21,15 @@
     <label>Название:</label>
     <input type="text" name="title" required>
     <br>
+    <label>Описание:</label>
+    <textarea name="description"></textarea>
+    <br>
     <label>Дата выполнения:</label>
     <input type="text" name="deadline">
     <br>
 
     <input type="submit" value="Создать">
   </form>
-  <a href="/">Назад</a>
+  <a href="{% url 'index' %}">Назад</a>
 </body>
 </html>
