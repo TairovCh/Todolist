@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from webapp.models import Task, STATUS_CHOICES
 # Create your views here.
 
@@ -11,6 +11,13 @@ def index_view(request):
 
     tasks = Task.objects.all()
     return render(request, 'index.html', {"tasks":tasks})
+
+
+def task_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, 'task_view.html', {'task': task})
+
+
 
 def create_task(request):
     if request.method == "GET":
