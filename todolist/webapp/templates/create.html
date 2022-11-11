@@ -10,32 +10,7 @@
     {% block content %}
     <h2>Создать задачу</h2>
     <form action="" method="POST">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label class="form-label">Статус:</label>
-        </div>
-        <div class="mb-3">
-            <select class="form-select" name="status">
-                {% for value, status in statuses %}
-                    <option value="{{ value }}">{{ status }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Название:</label>
-            <input class="form-control" type="text" name="title" required>
-        </div>
-        <div class="mb-3">
+        {% include "partial/form.html" with button_text="Создать" %}
 
-            <label class="form-label">Описание:</label>
-            <textarea class="form-control" name="description"></textarea>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Дата выполнения:</label>
-            <input class="form-control" type="text" name="deadline">
-        </div>
-        <div class="mb-3 col-auto">
-            <input class="btn btn-primary"" type="submit" value="Создать">
-        </div>
     </form>
     {% endblock %}
