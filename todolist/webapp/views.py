@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task, STATUS_CHOICES
 # Create your views here.
 
@@ -8,6 +8,7 @@ def index_view(request):
         task_id = request.GET.get('id')
         task = Task.objects.get(id=task_id)
         task.delete()
+        return redirect('index')
 
     tasks = Task.objects.all()
     return render(request, 'index.html', {"tasks":tasks})
@@ -26,7 +27,8 @@ def create_task(request):
         title = request.POST.get('title')
         status = request.POST.get('status')
         deadline = request.POST.get('deadline')
+        description = request.POST.get('description')
         if not deadline:
             deadline = None
-        new_task = Task.objects.create(title=title, status=status, deadline=deadline)
-        return render(request, 'task_view.html', {'task': new_task})
+        new_task = Task.objects.create(title=title, status=status, deadline=deadline, description=description)
+        return redirect('task_view', pk=new_task.pk)
