@@ -1,35 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create</title>
-</head>
-<body>
-  <h1>Создать задачу</h1>
-  <form action="" method="POST">
-    {% csrf_token %}
-    <label>Статус:</label>
-    <select name="status">
-        {% for value, status in statuses %}
-      <option value="{{ value }}">{{ status }}</option>
-      {% endfor %}
-    </select>
-    <br>
-    <label>Название:</label>
-    <input type="text" name="title" required>
-    <br>
-    <label>Описание:</label>
-    <textarea name="description"></textarea>
-    <br>
-    <label>Дата выполнения:</label>
-    <input type="text" name="deadline">
-    <br>
+{% extends "base.html" %}
+    {% block nav %}
+    <li class="nav-item">
 
-    <input type="submit" value="Создать">
-  </form>
-  <a href="{% url 'index' %}">Назад</a>
-</body>
-</html>
+    </li>
+    {% endblock %}
+
+
+
+    {% block content %}
+    <h2>Создать задачу</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Статус:</label>
+        </div>
+        <div class="mb-3">
+            <select class="form-select" name="status">
+                {% for value, status in statuses %}
+                    <option value="{{ value }}">{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Название:</label>
+            <input class="form-control" type="text" name="title" required>
+        </div>
+        <div class="mb-3">
+
+            <label class="form-label">Описание:</label>
+            <textarea class="form-control" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Дата выполнения:</label>
+            <input class="form-control" type="text" name="deadline">
+        </div>
+        <div class="mb-3 col-auto">
+            <input class="btn btn-primary"" type="submit" value="Создать">
+        </div>
+    </form>
+    {% endblock %}

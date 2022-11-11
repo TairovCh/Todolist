@@ -1,18 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-  <h3>Название: {{ task.title }}</h3>
-  <p>Статус: {{ task.get_status_display }}</p>
-  <p>Дата выполнения: {{ task.deadline }}</p>
-  <p style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
-  <hr>
-  <a href="{% url 'index' %}">Назад</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+    {% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_task' %}">Новая задача</a>
+    </li>
+    {% endblock %}
+
+    {% block content %}
+    <div class="card text-center">
+        <div class="card-header">
+            Название: {{ task.title }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Статус: {{ task.get_status_display }}</h5>
+            <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-footer text-muted">
+            Дата выполнения: {{ task.deadline }}
+        </div>
+    </div>
+
+
+    {% endblock %}

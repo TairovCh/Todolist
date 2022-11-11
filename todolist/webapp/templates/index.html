@@ -1,26 +1,30 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>To Do List</title>
-</head>
-<body>
-    <a href="{% url 'create_task' %}">Новая задача</a>
+{% extends "base.html" %}
+
+    {% block nav %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_task' %}">Новая задача</a>
+        </li>
+    {% endblock %}
+
+
+    {% block content %}
     <h1>To Do List</h1>
+    <div class="row">
+        {% for task in tasks %}
+            <div class="col-auto">
+                <div class="card col">
+                    <h5 class="card-header">Название: <a href="{% url 'task_view' task.pk %}">{{ task.title }}</a></h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Статус: {{ task.get_status_display }}</h5>
+                        <p class="card-text">Дата выполнения: {{ task.deadline|date:"d.m.y"}}</p>
 
-    {% for task in tasks %}
-        <h3>Название: <a href="{% url 'task_view' task.pk %}">{{ task.title }}</a></h3>
-        <p>Статус: {{ task.get_status_display }}</p>
-        <p>Дата выполнения: {{ task.deadline|date:"d.m.y"}}</p>
-        <form action="{% url 'index' %}?id={{ task.id }}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="delete">
-        </form>
-        <hr>
-    {% endfor %}
-
-</body>
-</html>
+                        <form action="{% url 'index' %}?id={{ task.id }}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="delete" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>    
+    {% endblock %}
