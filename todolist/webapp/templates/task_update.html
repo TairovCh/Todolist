@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+    {% block nav %}
+    <li class="nav-item">
+
+    </li>
+    {% endblock %}
+
+
+
+    {% block content %}
+    <h2>Обновить задачу</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Статус:</label>
+        </div>
+        <div class="mb-3">
+            <select class="form-select" name="status">
+                {% for value, status in statuses %}
+                    <option value="{{ task.status }}">{{ task.status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Название:</label>
+            <input class="form-control" type="text" name="title" value="{{ task.title }}" required>
+        </div>
+        <div class="mb-3">
+
+            <label class="form-label">Описание:</label>
+            <textarea class="form-control" name="description">{{ task.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Дата выполнения:</label>
+            <input class="form-control" type="text" name="deadline" value=" {{ task.deadline }}">
+        </div>
+        <div class="mb-3 col-auto">
+            <input class="btn btn-primary"" type="submit" value="Обновить">
+        </div>
+    </form>
+    {% endblock %}

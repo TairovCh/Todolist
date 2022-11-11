@@ -4,6 +4,9 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'create_task' %}">Новая задача</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
+    </li>
     {% endblock %}
 
     {% block content %}
