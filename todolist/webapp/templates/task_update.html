@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-    {% block nav %}
-    <li class="nav-item">
 
-    </li>
-    {% endblock %}
+{% block title %}Редактирование товара{% endblock %}
 
+{% block nav %}
+<li class="nav-item">
 
+</li>
+{% endblock %}
 
     {% block content %}
-    <h2>Обновить задачу</h2>
-    <form action="" method="POST">
-        {% include "partial/form.html" with button_text="Обновить" %}
-
-    </form>
+        <h2>Обновить задачу</h2>
+        <form action="" method="POST">
+            {% include "partial/form.html" with button_text="Обновить" %}
+        </form>
     {% endblock %}

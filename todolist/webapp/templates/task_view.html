@@ -1,31 +1,31 @@
 {% extends "base.html" %}
 
+{% block title %}Просмотр товара{% endblock %}
+
     {% block nav %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'create_task' %}">Новая задача</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'task_delete' task.pk %}">Удалить</a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'create_task' %}">Новая задача</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'task_update' task.pk %}">Редактировать задачу</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'task_delete' task.pk %}">Удалить</a>
+        </li>
     {% endblock %}
 
     {% block content %}
-    <div class="card text-center">
-        <div class="card-header">
-            Название: {{ task.title }}
+        <div class="card text-center">
+            <div class="card-header">
+                Название: {{ task.title }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Статус: {{ task.get_status_display }}</h5>
+                <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="card-footer text-muted">
+                Дата выполнения: {{ task.deadline }}
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">Статус: {{ task.get_status_display }}</h5>
-            <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        <div class="card-footer text-muted">
-            Дата выполнения: {{ task.deadline }}
-        </div>
-    </div>
-
-
     {% endblock %}

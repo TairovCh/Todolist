@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task, STATUS_CHOICES
+from webapp.forms import TaskForm
 # Create your views here.
 
 
@@ -22,28 +23,42 @@ def task_view(request, pk):
 
 def create_task(request):
     if request.method == "GET":
-        return render(request, 'create.html', {'statuses': STATUS_CHOICES})
+        form = TaskForm()
+        return render(request, 'create.html', { 'form': form })
     elif request.method == "POST":
-        title = request.POST.get('title')
-        status = request.POST.get('status')
-        deadline = request.POST.get('deadline')
-        description = request.POST.get('description')
-        if not deadline:
-            deadline = None
-        new_task = Task.objects.create(title=title, status=status, deadline=deadline, description=description)
-        return redirect('task_view', pk=new_task.pk)
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            new_task = Task.objects.create(
+                title = form.cleaned_data["title"],
+                status = form.cleaned_data["status"],
+                deadline = form.cleaned_data["deadline"],
+                description = form.cleaned_data["description"]
+            )
+            return redirect('task_view', pk=new_task.pk)
+        else:
+            return render(request, 'create.html', {'form': form})
 
 def task_update_view(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == "GET":
-        return render(request, 'task_update.html', {'task': task})
+        form = TaskForm(initial={
+            'title': task.title,
+            'description': task.description,
+            'status': task.status,
+            'title':task.title
+        })   
+        return render(request, 'task_update.html', {'form': form})
     elif request.method == "POST":
-        task.title = request.POST.get('title')
-        task.status = request.POST.get('status')
-        task.deadline = request.POST.get('deadline')
-        task.description = request.POST.get('description') 
-        task.save()   
-        return redirect("task_view", pk=task.pk)   
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.title = form.cleaned_data.get('title')
+            task.status = form.cleaned_data.get('status')
+            task.deadline = form.cleaned_data.get('deadline')
+            task.description = form.cleaned_data.get('description') 
+            task.save()   
+            return redirect("task_view", pk=task.pk)   
+        else:
+            return render(request, "task_update.html", {'form': form})
 
 
 def task_delete_view(request, pk):
