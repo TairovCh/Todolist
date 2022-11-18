@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from webapp.models import Task, STATUS_CHOICES
+from webapp.models import Task
 from webapp.forms import TaskForm
 # Create your views here.
 
