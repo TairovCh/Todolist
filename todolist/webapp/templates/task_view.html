@@ -21,7 +21,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="{% url 'task_update' task.pk %}" class="btn btn-primary">Обновление</a>
             </div>
             <div class="card-footer text-muted">
                 <p>Статус: {{ task.status.title }}</p>

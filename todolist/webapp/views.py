@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task
 from webapp.forms import TaskForm
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 # Create your views here.
 
 
@@ -45,29 +45,36 @@ class CreateTask(TemplateView):
             return self.render_to_response(context)
 
 
+class UpdateViev(View):
 
-
-def task_update_view(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    if request.method == "GET":
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs['pk'])
         form = TaskForm(initial={
-            'title': task.title,
+            'summary': task.summary,
             'description': task.description,
             'status': task.status,
-            'title':task.title
-        })   
-        return render(request, 'task_update.html', {'form': form})
-    elif request.method == "POST":
+            'type_task': task.type_task
+        })
+        return render(request, 'task_update.html', {'form': form, 'task': task})
+
+    def post(self, request, *args, **kwargs):
+
+        task = get_object_or_404(Task, pk=kwargs['pk'])
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            task.title = form.cleaned_data.get('title')
-            task.status = form.cleaned_data.get('status')
-            task.deadline = form.cleaned_data.get('deadline')
-            task.description = form.cleaned_data.get('description') 
-            task.save()   
-            return redirect("task_view", pk=task.pk)   
+            task.summary = form.cleaned_data['summary']
+            task.description = form.cleaned_data['description']
+            task.status = form.cleaned_data['status']
+            task.type_task = form.cleaned_data['type_task']
+            task.save()
+            return redirect('task_view', pk=task.pk)
         else:
-            return render(request, "task_update.html", {'form': form})
+            return render(request, 'task_update.html', {'form': form, 'task': task})
+
+
+
+
+
 
 
 def task_delete_view(request, pk):
