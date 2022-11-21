@@ -17,15 +17,15 @@
     {% block content %}
         <div class="card text-center">
             <div class="card-header">
-                Название: {{ task.title }}
+                Название: {{ task.summary }}
             </div>
             <div class="card-body">
-                <h5 class="card-title">Статус: {{ task.get_status_display }}</h5>
                 <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
             <div class="card-footer text-muted">
-                Дата выполнения: {{ task.deadline }}
+                <p>Статус: {{ task.status.title }}</p>
+                <p>Тип: {{ task.type_task.title }}</p>
             </div>
         </div>
     {% endblock %}
