@@ -15,15 +15,10 @@
         {% for task in tasks %}
             <div class="col-auto">
                 <div class="card col">
-                    <h5 class="card-header">Название: <a href="{% url 'task_view' task.pk %}">{{ task.title }}</a></h5>
+                    <h5 class="card-header">Название: <a href="{% url 'task_view' task.pk %}">{{ task.summary }}</a></h5>
                     <div class="card-body">
-                        <h5 class="card-title">Статус: {{ task.get_status_display }}</h5>
-                        <p class="card-text">Дата выполнения: {{ task.deadline|date:"d.m.y"}}</p>
-
-                        <!-- <form action="{% url 'index' %}?id={{ task.id }}" method="POST">
-                            {% csrf_token %}
-                            <input type="submit" value="delete" class="btn btn-primary">
-                        </form> -->
+                        <h5 class="card-title">Статус: {{ task.status.title }}</h5>
+                        <p class="card-text">Тип: {{ task.type_task.title}}</p>
                     </div>
                 </div>
             </div>
