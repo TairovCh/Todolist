@@ -26,24 +26,26 @@ class TaskView(TemplateView):
         
 
 
+class CreateTask(TemplateView):
+    template_name = 'create.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = TaskForm()
+        return context
 
-
-def create_task(request):
-    if request.method == "GET":
-        form = TaskForm()
-        return render(request, 'create.html', { 'form': form })
-    elif request.method == "POST":
+    def post(self, request, *args, **kwargs):
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            new_task = Task.objects.create(
-                summary = form.cleaned_data["summary"],
-                status = form.cleaned_data["status"],
-                description = form.cleaned_data["description"]
-            )
-            return redirect('task_view', pk=new_task.pk)
+            task = Task.objects.create(**form.cleaned_data)
+            return redirect('task_view', pk=task.pk)
         else:
-            return render(request, 'create.html', {'form': form})
+            context = self.get_context_data(**kwargs)
+            context['form'] = form
+            return self.render_to_response(context)
+
+
+
 
 def task_update_view(request, pk):
     task = get_object_or_404(Task, pk=pk)
