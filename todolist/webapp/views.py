@@ -45,7 +45,7 @@ class CreateTask(TemplateView):
             return self.render_to_response(context)
 
 
-class UpdateViev(View):
+class UpdateTask(View):
 
     def get(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
@@ -73,14 +73,15 @@ class UpdateViev(View):
 
 
 
+class DeleteTask(View):
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs['pk'])
+        return render(request, 'task_delete.html', {'task': task})
 
-
-
-
-def task_delete_view(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    if request.method == "GET":
-        return render(request, 'task_delete.html', { 'task': task })
-    elif request.method == "POST":
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs['pk'])
         task.delete()
         return redirect('index')
+
+
+

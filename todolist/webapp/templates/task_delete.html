@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Вы уверены что хотите удалить "{{ task.title }}"?</h4>
+    <h4>Вы уверены что хотите удалить "{{ task.summary }}"?</h4>
     <form method="POST" action="{% url "task_delete" task.pk %}" class="text-center">
         {% csrf_token %}
         <p><input type="submit" value="Потверждение"></p>
