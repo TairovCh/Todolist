@@ -37,7 +37,9 @@ class CreateTask(TemplateView):
     def post(self, request, *args, **kwargs):
         form = TaskForm(data=request.POST)
         if form.is_valid():
+            type_task = form.cleaned_data.pop('type_task')
             task = Task.objects.create(**form.cleaned_data)
+            task.type_task.set(type_task)
             return redirect('task_view', pk=task.pk)
         else:
             context = self.get_context_data(**kwargs)
@@ -53,7 +55,7 @@ class UpdateTask(View):
             'summary': task.summary,
             'description': task.description,
             'status': task.status,
-            'type_task': task.type_task
+            'type_task': task.type_task.all(),
         })
         return render(request, 'task_update.html', {'form': form, 'task': task})
 
@@ -65,8 +67,8 @@ class UpdateTask(View):
             task.summary = form.cleaned_data['summary']
             task.description = form.cleaned_data['description']
             task.status = form.cleaned_data['status']
-            task.type_task = form.cleaned_data['type_task']
             task.save()
+            task.type_task.set(form.cleaned_data['type_task'])
             return redirect('task_view', pk=task.pk)
         else:
             return render(request, 'task_update.html', {'form': form, 'task': task})

@@ -18,7 +18,9 @@
                     <h5 class="card-header">Название: <a href="{% url 'task_view' task.pk %}">{{ task.summary }}</a></h5>
                     <div class="card-body">
                         <h5 class="card-title">Статус: {{ task.status.title }}</h5>
-                        <p class="card-text">Тип: {{ task.type_task.title}}</p>
+                        <p>Тип: {% for type in task.type_task.all %}
+                            {{type.title}} {% if not forloop.last %},{% endif%}
+                            {% endfor %}</p>
                     </div>
                 </div>
             </div>

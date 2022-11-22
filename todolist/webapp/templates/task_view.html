@@ -25,7 +25,10 @@
             </div>
             <div class="card-footer text-muted">
                 <p>Статус: {{ task.status.title }}</p>
-                <p>Тип: {{ task.type_task.title }}</p>
+
+                <p>Тип: {% for type in task.type_task.all %}
+                    {{type.title}} {% if not forloop.last %},{% endif%}
+                {% endfor %}</p>
             </div>
         </div>
     {% endblock %}
