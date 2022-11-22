@@ -1,146 +1,106 @@
 [
 {
-    "model": "webapp.typetask",
-    "pk": 1,
-    "fields": {
-        "title": "Task"
-    }
+  "model": "webapp.typetask",
+  "pk": 1,
+  "fields": {
+    "title": "Task"
+  }
 },
 {
-    "model": "webapp.typetask",
-    "pk": 2,
-    "fields": {
-        "title": "Bug"
-    }
+  "model": "webapp.typetask",
+  "pk": 2,
+  "fields": {
+    "title": "Bug"
+  }
 },
 {
-    "model": "webapp.typetask",
-    "pk": 3,
-    "fields": {
-        "title": "Enhancement"
-    }
+  "model": "webapp.typetask",
+  "pk": 3,
+  "fields": {
+    "title": "Enhancement"
+  }
 },
 {
-    "model": "webapp.statustask",
-    "pk": 1,
-    "fields": {
-        "title": "New"
-    }
+  "model": "webapp.statustask",
+  "pk": 1,
+  "fields": {
+    "title": "New"
+  }
 },
 {
-    "model": "webapp.statustask",
-    "pk": 2,
-    "fields": {
-        "title": "In Progress"
-    }
+  "model": "webapp.statustask",
+  "pk": 2,
+  "fields": {
+    "title": "In Progress"
+  }
 },
 {
-    "model": "webapp.statustask",
-    "pk": 3,
-    "fields": {
-        "title": "Done"
-    }
+  "model": "webapp.statustask",
+  "pk": 3,
+  "fields": {
+    "title": "Done"
+  }
 },
 {
-    "model": "webapp.task",
-    "pk": 1,
-    "fields": {
-        "summary": "test",
-        "description": "testtest",
-        "status": 1,
-        "type_task": 1,
-        "create_time": "2022-11-18T12:31:24.171Z",
-        "update_time": "2022-11-18T12:31:24.171Z"
-    }
+  "model": "webapp.task",
+  "pk": 10,
+  "fields": {
+    "summary": "test50",
+    "description": "50",
+    "status": 1,
+    "create_time": "2022-11-22T09:00:09.880Z",
+    "update_time": "2022-11-22T09:00:09.880Z",
+    "type_task": [
+      1,
+      2
+    ]
+  }
 },
 {
-    "model": "webapp.task",
-    "pk": 2,
-    "fields": {
-        "summary": "test2",
-        "description": "test2",
-        "status": 2,
-        "type_task": 2,
-        "create_time": "2022-11-18T12:32:47.130Z",
-        "update_time": "2022-11-18T12:32:47.130Z"
-    }
+  "model": "webapp.task",
+  "pk": 11,
+  "fields": {
+    "summary": "test54",
+    "description": "dfdfdfd",
+    "status": 2,
+    "create_time": "2022-11-22T09:50:07.299Z",
+    "update_time": "2022-11-22T09:57:35.381Z",
+    "type_task": [
+      1,
+      2
+    ]
+  }
 },
 {
-    "model": "webapp.task",
-    "pk": 3,
-    "fields": {
-        "summary": "test3",
-        "description": "test3",
-        "status": 3,
-        "type_task": 3,
-        "create_time": "2022-11-18T12:32:57.571Z",
-        "update_time": "2022-11-18T12:32:57.571Z"
-    }
+  "model": "webapp.task",
+  "pk": 12,
+  "fields": {
+    "summary": "test55",
+    "description": "sdsdsdsd",
+    "status": 2,
+    "create_time": "2022-11-22T09:50:33.515Z",
+    "update_time": "2022-11-22T09:50:33.515Z",
+    "type_task": [
+      1
+    ]
+  }
 },
 {
-    "model": "webapp.task",
-    "pk": 4,
-    "fields": {
-        "summary": "test4",
-        "description": "test4",
-        "status": 1,
-        "type_task": 2,
-        "create_time": "2022-11-18T12:33:08.915Z",
-        "update_time": "2022-11-18T12:33:08.915Z"
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 5,
-    "fields": {
-        "summary": "test5",
-        "description": "test5",
-        "status": 1,
-        "type_task": 3,
-        "create_time": "2022-11-18T12:33:22.555Z",
-        "update_time": "2022-11-18T12:33:22.555Z"
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 6,
-    "fields": {
-        "summary": "test6",
-        "description": "test6",
-        "status": 2,
-        "type_task": 1,
-        "create_time": "2022-11-18T12:33:35.492Z",
-        "update_time": "2022-11-18T12:33:35.492Z"
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 7,
-    "fields": {
-        "summary": "test7",
-        "description": "test7",
-        "status": 2,
-        "type_task": 3,
-        "create_time": "2022-11-18T12:33:48.490Z",
-        "update_time": "2022-11-18T12:33:48.490Z"
-    }
-},
-{
-    "model": "auth.user",
-    "pk": 1,
-    "fields": {
-        "password": "pbkdf2_sha256$390000$Ewsqxooo6PqtrjiDFL8Xq1$gziHkNmlncbsl07nKioc1699LoazAPgnxMu8mHcc6y0=",
-        "last_login": "2022-11-18T12:29:13.902Z",
-        "is_superuser": true,
-        "username": "admin",
-        "first_name": "",
-        "last_name": "",
-        "email": "",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2022-11-18T12:29:00.192Z",
-        "groups": [],
-        "user_permissions": []
-    }
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$Ewsqxooo6PqtrjiDFL8Xq1$gziHkNmlncbsl07nKioc1699LoazAPgnxMu8mHcc6y0=",
+    "last_login": "2022-11-22T08:07:21.084Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-11-18T12:29:00.192Z",
+    "groups": [],
+    "user_permissions": []
+  }
 }
 ]
