@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from webapp.models import Task
 from webapp.forms import TaskForm
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, FormView
 # Create your views here.
 
 
@@ -26,25 +26,36 @@ class TaskView(TemplateView):
         
 
 
-class CreateTask(TemplateView):
+class CreateTask(FormView):
     template_name = 'create.html'
+    form_class = TaskForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["form"] = TaskForm()
-        return context
+    def get_success_url(self):
+        return reverse('task_view', kwargs={'pk': self.task.pk})
+    
+    def form_valid(self, form):
+        # self.task = form.save()
+        type_task = form.cleaned_data.pop('type_task')
+        self.task = Task.objects.create(**form.cleaned_data)
+        self.task.type_task.set(type_task)
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        form = TaskForm(data=request.POST)
-        if form.is_valid():
-            type_task = form.cleaned_data.pop('type_task')
-            task = Task.objects.create(**form.cleaned_data)
-            task.type_task.set(type_task)
-            return redirect('task_view', pk=task.pk)
-        else:
-            context = self.get_context_data(**kwargs)
-            context['form'] = form
-            return self.render_to_response(context)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["form"] = TaskForm()
+    #     return context
+
+    # def post(self, request, *args, **kwargs):
+    #     form = TaskForm(data=request.POST)
+    #     if form.is_valid():
+    #         type_task = form.cleaned_data.pop('type_task')
+    #         task = Task.objects.create(**form.cleaned_data)
+    #         task.type_task.set(type_task)
+    #         return redirect('task_view', pk=task.pk)
+    #     else:
+    #         context = self.get_context_data(**kwargs)
+    #         context['form'] = form
+    #         return self.render_to_response(context)
 
 
 class UpdateTask(View):
