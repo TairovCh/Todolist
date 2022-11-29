@@ -36,8 +36,3 @@ class TaskForm(forms.ModelForm):
         return description
 
 
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     if cleaned_data['summary'] == cleaned_data.get('description', ''):
-    #         raise ValidationError('Краткое описание и полное описание не должны быть одинаковыми')
-    #     return cleaned_data
