@@ -1,0 +1,21 @@
+python manage.py shell
+
+from webapp.models import Task, StatusTask, TypeTask
+from datetime import timedelta, datetime
+
+
+# 1
+Task.objects.filter(status__title__icontains='Done', create_time__update_time__range=(datetime.date.today()-timedelta(days=30), datetime.date.today())
+
+# 2
+Task.objects.filter(status__title__icontains='new') | Task.objects.filter(status__title__icontains='done')
+Task.objects.filter(type_task__title__icontains='Bug') | Task.objects.filter(type_task__title__icontains='task')
+
+
+# 3
+Task.objects.filter(type_task__title='Bug') & Task.objects.exclude(status__title='Done')
+
+
+
+
+
