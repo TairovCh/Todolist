@@ -8,9 +8,6 @@ class TaskForm(forms.ModelForm):
         fields = ['summary', 'description', 'status', 'type_task']
         widgets = {'type_task': widgets.CheckboxSelectMultiple}
 
-
-
-
     def clean_summary(self):
         summary = self.cleaned_data['summary']
         bans = ['test_1', 'test_2', "test_3"]
@@ -23,7 +20,6 @@ class TaskForm(forms.ModelForm):
                 self.add_error('summary', ValidationError("Эти слова запрешено вводить!"))
         return summary
 
-
     def clean_description(self):
         description = self.cleaned_data['description']
         bans = ['test_1', 'test_2', "test_3"]
@@ -31,7 +27,10 @@ class TaskForm(forms.ModelForm):
             for desc in description.split():
                 if desc == ban:
                     self.add_error('summary', ValidationError("Эти слова запрешено вводить!"))
-        if len(description) < 30:
+        if len(description) < 10:
             self.add_error('description', ValidationError('Длина поля должна составлять не меенее %(length)d символов!', code='too_short', params={'length': 30}))
         return description
 
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=40, required=False, label='Найти')
