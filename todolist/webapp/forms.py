@@ -35,9 +35,3 @@ class TaskForm(forms.ModelForm):
             self.add_error('description', ValidationError('Длина поля должна составлять не меенее %(length)d символов!', code='too_short', params={'length': 30}))
         return description
 
-
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     if cleaned_data['summary'] == cleaned_data.get('description', ''):
-    #         raise ValidationError('Краткое описание и полное описание не должны быть одинаковыми')
-    #     return cleaned_data
