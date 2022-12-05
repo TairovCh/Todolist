@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, View, FormView, ListView
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'tasks/index.html'
     context_object_name = 'tasks'
     model = Task
     ordering = ('create_time', 'update_time',)
@@ -42,7 +42,7 @@ class IndexView(ListView):
 
 
 class TaskView(TemplateView):
-    template_name = 'task_view.html'
+    template_name = 'tasks/task_view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,7 +51,7 @@ class TaskView(TemplateView):
 
 
 class CreateTask(FormView):
-    template_name = 'create.html'
+    template_name = 'tasks/create.html'
     form_class = TaskForm
 
     def get_success_url(self):
@@ -59,15 +59,12 @@ class CreateTask(FormView):
     
     def form_valid(self, form):
         self.task = form.save()
-        # type_task = form.cleaned_data.pop('type_task')
-        # self.task = Task.objects.create(**form.cleaned_data)
-        # self.task.type_task.set(type_task)
         return super().form_valid(form)
 
 
 class UpdateTask(FormView):
 
-    template_name = "task_update.html"
+    template_name = "tasks/task_update.html"
     form_class = TaskForm
 
     def get_object(self):
@@ -99,7 +96,7 @@ class UpdateTask(FormView):
 class DeleteTask(View):
     def get(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
-        return render(request, 'task_delete.html', {'task': task})
+        return render(request, 'tasks/task_delete.html', {'task': task})
 
     def post(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs['pk'])
