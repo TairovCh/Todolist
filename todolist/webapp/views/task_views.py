@@ -4,7 +4,7 @@ from django.utils.http import urlencode
 from django.db.models import Q
 from webapp.models import Task
 from webapp.forms import TaskForm, SimpleSearchForm
-from django.views.generic import TemplateView, View, FormView, ListView, UpdateView, DeleteView
+from django.views.generic import TemplateView, View, FormView, ListView, UpdateView, DeleteView, CreateView
 
 
 class IndexView(ListView):
@@ -50,17 +50,14 @@ class TaskView(TemplateView):
         context["task"] = get_object_or_404(Task, pk=kwargs['pk'])
         return context
 
-
-class CreateTask(FormView):
+#Готово
+class CreateTask(CreateView):
     template_name = 'tasks/create.html'
     form_class = TaskForm
+    model = Task
 
     def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.task.pk})
-    
-    def form_valid(self, form):
-        self.task = form.save()
-        return super().form_valid(form)
+        return reverse('task_view', kwargs={'pk': self.object.pk})
 
 # Готово
 class UpdateTask(UpdateView):

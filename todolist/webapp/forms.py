@@ -5,7 +5,7 @@ from webapp.models import Task, ProjectTask
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['summary', 'description', 'status', 'type_task']
+        fields = ['summary', 'description', 'project_task', 'status', 'type_task']
         widgets = {'type_task': widgets.CheckboxSelectMultiple}
 
     def clean_summary(self):
