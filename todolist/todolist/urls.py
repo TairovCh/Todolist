@@ -24,8 +24,12 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('create/', CreateTask.as_view(), name='create_task'),
     path('task/<int:pk>/', TaskView.as_view(), name='task_view'),
+    
+
     path('task/<int:pk>/update/', UpdateTask.as_view(), name='task_update'),
     path('task/<int:pk>/delete/', DeleteTask.as_view(), name='task_delete'),
+
+
     path('project/', ProjectIndexView.as_view(), name='project_index'),
     path('project/create/', CreateProject.as_view(), name='create_project'),
     path('project/view/<int:pk>/', ProjectView.as_view(), name='project_view'),
