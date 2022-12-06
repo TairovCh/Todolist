@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.urls import reverse_lazy
 from django.utils.http import urlencode
 from django.db.models import Q
 from webapp.models import Task
 from webapp.forms import TaskForm, SimpleSearchForm
-from django.views.generic import TemplateView, View, FormView, ListView, UpdateView
+from django.views.generic import TemplateView, View, FormView, ListView, UpdateView, DeleteView
 
 
 class IndexView(ListView):
@@ -61,7 +62,7 @@ class CreateTask(FormView):
         self.task = form.save()
         return super().form_valid(form)
 
-
+# Готово
 class UpdateTask(UpdateView):
 
     template_name = "tasks/task_update.html"
@@ -72,16 +73,9 @@ class UpdateTask(UpdateView):
     def get_success_url(self):
         return reverse('task_view', kwargs={'pk': self.object.pk})
 
-
-class DeleteTask(View):
-    def get(self, request, *args, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs['pk'])
-        return render(request, 'tasks/task_delete.html', {'task': task})
-
-    def post(self, request, *args, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs['pk'])
-        task.delete()
-        return redirect('index')
-
-
-
+# Готово
+class DeleteTask(DeleteView):
+    template_name = 'tasks/task_delete.html'
+    model = Task
+    context_object_name = 'task'
+    success_url = reverse_lazy('index')
