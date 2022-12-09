@@ -50,7 +50,7 @@ class TaskView(TemplateView):
         context["task"] = get_object_or_404(Task, pk=kwargs['pk'])
         return context
 
-#Готово
+
 class CreateTask(CreateView):
     template_name = 'tasks/create.html'
     form_class = TaskForm
@@ -59,7 +59,7 @@ class CreateTask(CreateView):
     def get_success_url(self):
         return reverse('task_view', kwargs={'pk': self.object.pk})
 
-# Готово
+
 class UpdateTask(UpdateView):
 
     template_name = "tasks/task_update.html"
@@ -70,7 +70,7 @@ class UpdateTask(UpdateView):
     def get_success_url(self):
         return reverse('task_view', kwargs={'pk': self.object.pk})
 
-# Готово
+
 class DeleteTask(DeleteView):
     template_name = 'tasks/task_delete.html'
     model = Task

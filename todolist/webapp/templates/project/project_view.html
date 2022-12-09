@@ -6,6 +6,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'create_project' %}">Новый проект</a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{% url 'project_delete' projecttask.pk %}">Удалить</a>
         </li>
@@ -26,6 +27,7 @@
             <h5 class="card-title">Дата начала:{{ projecttask.start_date }} </h5>
             <p class="card-text">Дата окончания: {{ projecttask.end_date|default:"-" }} </p>
             <p class="card-text" style="white-space: pre-wrap">{{ projecttask.description }}</p>
+            <a href="{% url 'project_update' projecttask.pk %}" class="btn btn-primary">Обновление</a>
         </div>
     </div>
 
