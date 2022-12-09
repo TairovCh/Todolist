@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import get_object_or_404, reverse
 from django.urls import reverse_lazy
 from django.utils.http import urlencode
 from django.db.models import Q
 from webapp.models import Task
 from webapp.forms import TaskForm, SimpleSearchForm
-from django.views.generic import TemplateView, View, FormView, ListView, UpdateView, DeleteView, CreateView
+from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, CreateView
 
 
 class IndexView(ListView):
