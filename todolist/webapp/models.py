@@ -28,9 +28,7 @@ class StatusTask(models.Model):
 class Task(models.Model):
     summary = models.CharField(max_length=60, verbose_name='Краткое описание')
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name="Полное описание")
-
-    project_task = models.ForeignKey("webapp.ProjectTask", verbose_name=("Проект"), related_name='tasks', on_delete=models.PROTECT)
-
+    project_task = models.ForeignKey("webapp.ProjectTask", verbose_name=("Проект"), related_name='tasks', on_delete=models.CASCADE)
     status = models.ForeignKey('webapp.StatusTask', on_delete=models.PROTECT, related_name='tasks', verbose_name='Статус')
     type_task = models.ManyToManyField('webapp.TypeTask', related_name='tasks', blank=True)
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
