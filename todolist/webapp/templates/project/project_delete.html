@@ -4,15 +4,15 @@
 
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_view' project.pk %}">просмотр проекта</a>
+        <a class="nav-link" href="{% url 'webapp:project_view' project.pk %}">просмотр проекта</a>
     </li>
 {% endblock %}
 
 {% block content %}
     <h4>Вы уверены что хотите удалить "{{ project.name }}"?</h4>
-    <form method="POST" action="{% url "project_delete" project.pk %}" class="text-center">
+    <form method="POST" action="{% url 'webapp:project_delete' project.pk %}" class="text-center">
         {% csrf_token %}
         <p><input type="submit" value="Потверждение"></p>
-        <p><a href="{% url "project_view" project.pk %}">Отмена</a></p>
+        <p><a href="{% url 'webapp:project_view' project.pk %}">Отмена</a></p>
     </form>
 {% endblock %}

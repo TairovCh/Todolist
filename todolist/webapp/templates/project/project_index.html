@@ -5,10 +5,10 @@
     {% block nav %}
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'create_task' %}">Новая задача</a>
+            <a class="nav-link" href="{% url 'webapp:create_task' %}">Новая задача</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'create_project' %}">Создать проект</a>
+            <a class="nav-link" href="{% url 'webapp:create_project' %}">Создать проект</a>
         </li>
     </ul>
 
@@ -21,7 +21,7 @@
         {% for project in projects %}
             <div class="col-auto">
                 <div class="card col">
-                    <h5 class="card-header">Название: <a href="{% url 'project_view' project.pk %}">{{ project.name }}</a></h5>
+                    <h5 class="card-header">Название: <a href="{% url 'webapp:project_view' project.pk %}">{{ project.name }}</a></h5>
                     <p>Дата создание: {{project.start_date}}</p>
                     <p>Дата окончания: {{project.end_date|default:'-'}}</p>
                 </div>

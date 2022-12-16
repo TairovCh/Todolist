@@ -4,15 +4,15 @@
 
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'task_view' task.pk %}">Просмотр задачи</a>
+        <a class="nav-link" href="{% url 'webapp:task_view' task.pk %}">Просмотр задачи</a>
     </li>
 {% endblock %}
 
 {% block content %}
     <h4>Вы уверены что хотите удалить "{{ task.summary }}"?</h4>
-    <form method="POST" action="{% url "task_delete" task.pk %}" class="text-center">
+    <form method="POST" action="{% url "webapp:task_delete" task.pk %}" class="text-center">
         {% csrf_token %}
         <p><input type="submit" value="Потверждение"></p>
-        <p><a href="{% url "task_view" task.pk %}">Отмена</a></p>
+        <p><a href="{% url "webapp:task_view" task.pk %}">Отмена</a></p>
     </form>
 {% endblock %}

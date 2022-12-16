@@ -57,7 +57,7 @@ class CreateTask(CreateView):
     model = Task
 
     def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:task_view', kwargs={'pk': self.object.pk})
 
 
 class UpdateTask(UpdateView):
@@ -68,11 +68,11 @@ class UpdateTask(UpdateView):
     context_object_name = 'task'
 
     def get_success_url(self):
-        return reverse('task_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:task_view', kwargs={'pk': self.object.pk})
 
 
 class DeleteTask(DeleteView):
     template_name = 'tasks/task_delete.html'
     model = Task
     context_object_name = 'task'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('webapp:index')
