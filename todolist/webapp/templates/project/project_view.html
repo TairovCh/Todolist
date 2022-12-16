@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %}Просмотр проекта{% endblock %}
-    {% block nav %}
+{% block nav %}
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:create_project' %}">Новый проект</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:project_delete' projecttask.pk %}">Удалить</a>
     </li>
-    {% endblock %}
+    {% endif %}
+{% endblock %}
 
 
 
@@ -24,7 +26,9 @@
             <h5 class="card-title">Дата начала:{{ projecttask.start_date }} </h5>
             <p class="card-text">Дата окончания: {{ projecttask.end_date|default:"-" }} </p>
             <p class="card-text" style="white-space: pre-wrap">{{ projecttask.description }}</p>
+            {% if request.user.is_authenticated %}
             <a href="{% url 'webapp:project_update' projecttask.pk %}" class="btn btn-primary">Обновление</a>
+            {% endif %}
         </div>
     </div>
 
@@ -50,8 +54,10 @@
                         <p class="card-text" style="white-space: pre-wrap">{{ task.description }}</p>
                     </div>
                     <div class="card-footer text-muted">
+                        {% if request.user.is_authenticated %}
                         <a href="{% url 'webapp:task_update' task.pk %}" class="btn btn-primary">Update</a>
                         <a href="{% url 'webapp:task_delete' task.pk %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

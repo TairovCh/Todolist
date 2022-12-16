@@ -5,6 +5,7 @@ from django.db.models import Q
 from webapp.models import Task
 from webapp.forms import TaskForm, SimpleSearchForm
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(ListView):
@@ -51,7 +52,7 @@ class TaskView(TemplateView):
         return context
 
 
-class CreateTask(CreateView):
+class CreateTask(LoginRequiredMixin, CreateView):
     template_name = 'tasks/create.html'
     form_class = TaskForm
     model = Task

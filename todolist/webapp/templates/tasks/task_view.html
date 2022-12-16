@@ -2,7 +2,8 @@
 
 {% block title %}Просмотр задачи{% endblock %}
 
-    {% block nav %}
+{% block nav %}
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:create_task' %}">Новая задача</a>
     </li>
@@ -10,7 +11,8 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:task_delete' task.pk %}">Удалить</a>
     </li>
-    {% endblock %}
+    {% endif %}
+{% endblock %}
 
     {% block content %}
         <div class="card text-center">
@@ -19,7 +21,9 @@
             </div>
             <div class="card-body">
                 <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'webapp:task_update' task.pk %}" class="btn btn-primary">Обновление</a>
+                {% endif %}
             </div>
             <div class="card-footer text-muted">
                 <p>Статус: {{ task.status.title }}</p>
