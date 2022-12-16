@@ -1,25 +1,11 @@
+{% extends 'base.html' %}
 
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-
-
-
-    <title>Вход</title>
-</head>
-<body>
-<div class="container">
+{% block content %}
     <h1>Вход</h1>
-    <form action="{% url 'login' %}" method="post" class="text-center">
+    <form action="{% url 'accounts:login' %}" method="post" class="text-center">
         {% csrf_token %}
         {% if has_error %}
-            <p class="form-error">Неверное имя пользователя или пароль.</p>
+            <p class="text-danger">Неверное имя пользователя или пароль.</p>
         {% endif %}
         <div class="form-group">
             <label for="username" class="form-label">Имя пользователя:</label>
@@ -31,8 +17,5 @@
         </div>
         <button type="submit">Войти</button>
     </form>
-</div>
 
-
-</body>
-</html>
+{% endblock %}
