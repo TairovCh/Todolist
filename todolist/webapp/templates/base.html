@@ -25,11 +25,11 @@
                         <p class="nav-link" >Привет, {{ request.user.username }}</p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a>
+                        <a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Выйти</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:login' %}">Войти</a>
+                        <a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Войти</a>
                     </li>
                 {% endif %}
                 </ul>
