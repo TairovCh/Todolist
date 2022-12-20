@@ -25,17 +25,3 @@ class MyUserCreationForm(UserCreationForm):
 
 
 
-
-
-
-
-
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         password = cleaned_data.get("password")
-#         password_confirm = cleaned_data.get("password_confirm")
-#         if password != password_confirm:
-#             raise forms.ValidationError('Пароли не совпадают!')
-#         return cleaned_data
-
-
