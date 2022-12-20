@@ -4,6 +4,7 @@ from webapp.models import ProjectTask
 from webapp.forms import ProjectTaskForm
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ProjectIndexView(ListView):
     template_name = 'project/project_index.html'
@@ -12,7 +13,7 @@ class ProjectIndexView(ListView):
     ordering = '-start_date' 
 
 
-class ProjectView(DetailView):
+class ProjectView(LoginRequiredMixin, DetailView):
     template_name = 'project/project_view.html'
     model = ProjectTask
 
@@ -30,7 +31,7 @@ class ProjectView(DetailView):
         return context
 
 
-class CreateProject(CreateView):
+class CreateProject(LoginRequiredMixin, CreateView):
     template_name = 'project/project_create.html'
     model = ProjectTask
     form_class = ProjectTaskForm
@@ -39,14 +40,14 @@ class CreateProject(CreateView):
         return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectDelete(DeleteView):
+class ProjectDelete(LoginRequiredMixin, DeleteView):
     template_name = 'project/project_delete.html'
     model = ProjectTask
     context_object_name = 'project'
     success_url = reverse_lazy('webapp:project_index')
 
 
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(LoginRequiredMixin, UpdateView):
     template_name = "project/project_update.html"
     form_class = ProjectTaskForm
     model = ProjectTask

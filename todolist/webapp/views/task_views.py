@@ -43,7 +43,7 @@ class IndexView(ListView):
         return context
 
 
-class TaskView(TemplateView):
+class TaskView(LoginRequiredMixin, TemplateView):
     template_name = 'tasks/task_view.html'
 
     def get_context_data(self, **kwargs):
@@ -61,7 +61,7 @@ class CreateTask(LoginRequiredMixin, CreateView):
         return reverse('webapp:task_view', kwargs={'pk': self.object.pk})
 
 
-class UpdateTask(UpdateView):
+class UpdateTask(LoginRequiredMixin, UpdateView):
 
     template_name = "tasks/task_update.html"
     form_class = TaskForm
@@ -72,7 +72,7 @@ class UpdateTask(UpdateView):
         return reverse('webapp:task_view', kwargs={'pk': self.object.pk})
 
 
-class DeleteTask(DeleteView):
+class DeleteTask(LoginRequiredMixin, DeleteView):
     template_name = 'tasks/task_delete.html'
     model = Task
     context_object_name = 'task'
