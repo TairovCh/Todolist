@@ -4,7 +4,7 @@ from webapp.models import ProjectTask
 from webapp.forms import ProjectTaskForm, ProjectUserForm
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 class ProjectIndexView(ListView):
     template_name = 'project/project_index.html'
@@ -31,41 +31,53 @@ class ProjectView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CreateProject(LoginRequiredMixin, CreateView):
+class CreateProject(UserPassesTestMixin, CreateView):
     template_name = 'project/project_create.html'
     model = ProjectTask
     form_class = ProjectTaskForm
+    context_object_name = 'project'
+
+    def test_func(self):
+        return self.get_object().user == self.request.user or self.request.user.has_perm('webapp.add_projecttask')
+
 
     def get_success_url(self):
         return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
 
-class ProjectDelete(LoginRequiredMixin, DeleteView):
+
+class ProjectDelete(UserPassesTestMixin, DeleteView):
     template_name = 'project/project_delete.html'
     model = ProjectTask
     context_object_name = 'project'
     success_url = reverse_lazy('webapp:project_index')
 
+    def test_func(self):
+        return self.get_object().user == self.request.user or self.request.user.has_perm('webapp.delete_projecttask')
 
-class ProjectUpdate(LoginRequiredMixin, UpdateView):
+
+class ProjectUpdate(UserPassesTestMixin, UpdateView):
     template_name = "project/project_update.html"
     form_class = ProjectTaskForm
     model = ProjectTask
     context_object_name = 'project'
 
+    def test_func(self):
+        return self.get_object().user == self.request.user or self.request.user.has_perm('webapp.change_projecttask')
+
     def get_success_url(self):
         return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
 
-class ProjectUserUpdate(LoginRequiredMixin, UpdateView):
+class ProjectUserUpdate(UserPassesTestMixin, UpdateView):
     template_name = "project/project_user.html"
     form_class = ProjectUserForm
     model = ProjectTask
     context_object_name = 'project'
+
+    def test_func(self):
+        return self.get_object().user == self.request.user or self.request.user.has_perm('webapp.сan_change_user')
 
     def get_success_url(self):
         return reverse('webapp:project_view', kwargs={'pk': self.object.pk})

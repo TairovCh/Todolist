@@ -38,8 +38,8 @@ class SimpleSearchForm(forms.Form):
 class ProjectTaskForm(forms.ModelForm):
     class Meta:
         model = ProjectTask
-        fields = ['name', 'description', 'start_date', 'end_date', 'user']
-        widgets = {'user': widgets.CheckboxSelectMultiple}
+        exclude = ['user']
+
 
 
 class ProjectUserForm(forms.ModelForm):

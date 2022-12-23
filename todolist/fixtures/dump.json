@@ -6,7 +6,8 @@
     "name": "Project1",
     "description": "test1-1000",
     "start_date": "2022-12-05",
-    "end_date": "2023-12-05"
+    "end_date": "2023-12-05",
+    "user": []
   }
 },
 {
@@ -16,7 +17,106 @@
     "name": "Project2",
     "description": "test1001-2000",
     "start_date": "2022-12-05",
-    "end_date": "2023-03-16"
+    "end_date": "2023-03-16",
+    "user": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 5,
+  "fields": {
+    "name": "sdsdsds",
+    "description": "dsdsdsdsds",
+    "start_date": "2022-12-16",
+    "end_date": null,
+    "user": []
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 7,
+  "fields": {
+    "name": "sdsdsdsdsd",
+    "description": "sdsdsdsdsds",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 8,
+  "fields": {
+    "name": "sdsdsdswew",
+    "description": "sdsdsds",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 9,
+  "fields": {
+    "name": "testproject1",
+    "description": "testtestesdsdsd",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": []
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 10,
+  "fields": {
+    "name": "xcxcxcxcx",
+    "description": "xcxcxcxcxcxc",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 11,
+  "fields": {
+    "name": "sdsdsdsdsds",
+    "description": "sdsdsdsdsds",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": []
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 12,
+  "fields": {
+    "name": "sdsddssd",
+    "description": "sdsdsds",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": []
+  }
+},
+{
+  "model": "webapp.projecttask",
+  "pk": 13,
+  "fields": {
+    "name": "sdsdsds",
+    "description": "sdsdsds",
+    "start_date": "2022-12-23",
+    "end_date": null,
+    "user": [
+      16
+    ]
   }
 },
 {
@@ -66,29 +166,13 @@
   "pk": 1,
   "fields": {
     "summary": "test1",
-    "description": "qwertyuioopp[]",
+    "description": "qwertyuioopp[]2221112222",
     "project_task": 1,
     "status": 1,
     "create_time": "2022-12-05T23:11:38.959Z",
-    "update_time": "2022-12-05T23:11:38.959Z",
+    "update_time": "2022-12-19T17:59:00.644Z",
     "type_task": [
       1
-    ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 2,
-  "fields": {
-    "summary": "test2",
-    "description": "sdasdsadasdsdasdsadsda",
-    "project_task": 1,
-    "status": 2,
-    "create_time": "2022-12-05T23:12:24.558Z",
-    "update_time": "2022-12-05T23:12:24.558Z",
-    "type_task": [
-      2,
-      3
     ]
   }
 },
@@ -156,35 +240,49 @@
 },
 {
   "model": "webapp.task",
-  "pk": 7,
+  "pk": 8,
   "fields": {
-    "summary": "test6",
-    "description": "wdawdcwdcwadcwadcwcwcwcwac",
-    "project_task": 1,
-    "status": 2,
-    "create_time": "2022-12-05T23:16:07.643Z",
-    "update_time": "2022-12-05T23:16:07.643Z",
+    "summary": "test1002",
+    "description": "sdsdsdsdsdsdsdssdsd",
+    "project_task": 2,
+    "status": 1,
+    "create_time": "2022-12-06T23:00:39.882Z",
+    "update_time": "2022-12-16T07:10:51.545Z",
     "type_task": [
+      1,
       2
     ]
   }
 },
 {
-  "model": "auth.user",
-  "pk": 1,
+  "model": "webapp.task",
+  "pk": 12,
   "fields": {
-    "password": "pbkdf2_sha256$390000$cyKxUMSAOXGZX5OTYR94kj$tEI/i5WI1ipJGW3KjaKy0enCTlwkxzWK7gZEEy/I2MU=",
-    "last_login": "2022-12-05T23:01:07.671Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2022-12-05T23:00:29.580Z",
-    "groups": [],
-    "user_permissions": []
+    "summary": "test54sd",
+    "description": "sdsdsdsdsdsdsdsdsdsdsdsdsd",
+    "project_task": 1,
+    "status": 1,
+    "create_time": "2022-12-16T07:11:06.331Z",
+    "update_time": "2022-12-16T07:11:06.331Z",
+    "type_task": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 13,
+  "fields": {
+    "summary": "sdsdsdsdsd",
+    "description": "sdsdsdsdsd",
+    "project_task": 1,
+    "status": 1,
+    "create_time": "2022-12-23T11:35:54.671Z",
+    "update_time": "2022-12-23T11:35:54.671Z",
+    "type_task": [
+      1
+    ]
   }
 }
 ]

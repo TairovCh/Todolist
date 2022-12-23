@@ -4,13 +4,19 @@
 {% block nav %}
     {% if request.user.is_authenticated %}
     <li class="nav-item">
+        {% if perms.webapp.add_project or projecttask.user == request.user %}
         <a class="nav-link" href="{% url 'webapp:create_project' %}">Новый проект</a>
+        {% endif %}
     </li>
     <li class="nav-item">
+        {% if perms.webapp.delete_project or projecttask.user == request.user %}
         <a class="nav-link" href="{% url 'webapp:project_delete' projecttask.pk %}">Удалить</a>
+        {% endif %}
     </li>
     <li class="nav-item">
+        {% if perms.webapp.сan_change_user or projecttask.user == request.user %}
         <a class="nav-link" href="{% url 'webapp:project_userupdate' projecttask.pk %}">редактирование пользователя</a>
+        {% endif %}
     </li>
     {% endif %}
 {% endblock %}

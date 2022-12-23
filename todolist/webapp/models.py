@@ -10,6 +10,13 @@ class ProjectTask(models.Model):
     end_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
     user = models.ManyToManyField(get_user_model(), related_name='projecttasks', verbose_name='Пользователь')
 
+    class Meta:
+        permissions = [
+            ('сan_add_user', 'Может добавлять пользователя'),
+            ('сan_change_user', 'Может изменять пользователя'),
+            ('сan_delete_user', 'Может удалять пользователя'),
+        ]
+
     def __str__(self):
         return f"{self.pk}. {self.name}"
 
