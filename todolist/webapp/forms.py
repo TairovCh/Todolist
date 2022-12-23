@@ -38,5 +38,13 @@ class SimpleSearchForm(forms.Form):
 class ProjectTaskForm(forms.ModelForm):
     class Meta:
         model = ProjectTask
-        fields = ['name', 'description', 'start_date', 'end_date']
+        fields = ['name', 'description', 'start_date', 'end_date', 'user']
+        widgets = {'user': widgets.CheckboxSelectMultiple}
+
+
+class ProjectUserForm(forms.ModelForm):
+    class Meta:
+        model = ProjectTask
+        fields = ['name', 'user']
+        widgets = {'user': widgets.CheckboxSelectMultiple}
 

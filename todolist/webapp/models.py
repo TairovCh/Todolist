@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 
 class ProjectTask(models.Model):
@@ -7,9 +8,11 @@ class ProjectTask(models.Model):
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
     start_date = models.DateField(default=timezone.now, verbose_name='Дата начала')
     end_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
+    user = models.ManyToManyField(get_user_model(), related_name='projecttasks', verbose_name='Пользователь')
 
     def __str__(self):
         return f"{self.pk}. {self.name}"
+
 
 class TypeTask(models.Model):
     title = models.CharField(max_length=25, verbose_name='Название')

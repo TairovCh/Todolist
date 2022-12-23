@@ -1,10 +1,10 @@
 from django.shortcuts import reverse
 from django.core.paginator import Paginator
 from webapp.models import ProjectTask
-from webapp.forms import ProjectTaskForm
+from webapp.forms import ProjectTaskForm, ProjectUserForm
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 class ProjectIndexView(ListView):
     template_name = 'project/project_index.html'
@@ -39,6 +39,10 @@ class CreateProject(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 class ProjectDelete(LoginRequiredMixin, DeleteView):
     template_name = 'project/project_delete.html'
@@ -50,6 +54,16 @@ class ProjectDelete(LoginRequiredMixin, DeleteView):
 class ProjectUpdate(LoginRequiredMixin, UpdateView):
     template_name = "project/project_update.html"
     form_class = ProjectTaskForm
+    model = ProjectTask
+    context_object_name = 'project'
+
+    def get_success_url(self):
+        return reverse('webapp:project_view', kwargs={'pk': self.object.pk})
+
+
+class ProjectUserUpdate(LoginRequiredMixin, UpdateView):
+    template_name = "project/project_user.html"
+    form_class = ProjectUserForm
     model = ProjectTask
     context_object_name = 'project'
 

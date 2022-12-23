@@ -25,4 +25,6 @@ admin.site.register(TypeTask, TypeTaskAdmin)
 class ProjectTaskAdmin(admin.ModelAdmin):
     list_display = ['name', 'description', 'start_date', 'end_date']
 
+
+
 admin.site.register(ProjectTask, ProjectTaskAdmin)

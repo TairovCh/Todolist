@@ -9,6 +9,9 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:project_delete' projecttask.pk %}">Удалить</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'webapp:project_userupdate' projecttask.pk %}">редактирование пользователя</a>
+    </li>
     {% endif %}
 {% endblock %}
 
@@ -25,8 +28,11 @@
         <div class="card-body">
             <h5 class="card-title">Дата начала:{{ projecttask.start_date }} </h5>
             <p class="card-text">Дата окончания: {{ projecttask.end_date|default:"-" }} </p>
-            <p class="card-text" style="white-space: pre-wrap">{{ projecttask.description }}</p>
+            <p class="card-text" style="white-space: pre-wrap">Описание: {{ projecttask.description }}</p>
             {% if request.user.is_authenticated %}
+            <p>Пользователи: {% for user in projecttask.user.all %}
+                {{user.username}} {% if not forloop.last %},{% endif%}
+                {% endfor %}</p>
             <a href="{% url 'webapp:project_update' projecttask.pk %}" class="btn btn-primary">Обновление</a>
             {% endif %}
         </div>
