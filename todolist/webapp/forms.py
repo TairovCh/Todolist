@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import widgets, ValidationError
 from webapp.models import Task, ProjectTask
+from django.contrib.auth import get_user_model
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -38,13 +39,26 @@ class SimpleSearchForm(forms.Form):
 class ProjectTaskForm(forms.ModelForm):
     class Meta:
         model = ProjectTask
-        exclude = ['user']
+        fields = ['name', 'description', 'start_date', 'end_date']
 
 
 
 class ProjectUserForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['user'].queryset = get_user_model().objects.exclude(pk=self.user.pk)
     class Meta:
         model = ProjectTask
-        fields = ['name', 'user']
+        fields = ['user']
         widgets = {'user': widgets.CheckboxSelectMultiple}
 
+    def save(self, commit=True):
+        projecttask = super().save(commit=commit)
+
+        if commit:
+            projecttask.user.add(self.user)
+            projecttask.save()
+
+        return projecttask

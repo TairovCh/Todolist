@@ -3,17 +3,13 @@
 {% block title %}Страница проекта{% endblock %}
 
 {% block nav %}
-    {% if request.user.is_authenticated %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'webapp:create_task' %}">Новая задача</a>
-    </li>
 
     <li class="nav-item">
-        {% if perms.webapp.add_project or projecttask.user == request.user %}
-        <a class="nav-link" href="{% url 'webapp:create_project' %}">Создать проект</a>
+        {% if perms.webapp.add_projecttask %}
+            <a class="nav-link" href="{% url 'webapp:create_project' %}">Создать проект</a>
         {% endif %}    
     </li>
-    {% endif %}
+
 {% endblock %}
 
 

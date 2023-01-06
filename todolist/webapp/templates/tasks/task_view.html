@@ -5,11 +5,15 @@
 {% block nav %}
     {% if request.user.is_authenticated %}
     <li class="nav-item">
+        {% if perms.webapp.add_task or projecttask.user == request.user %}
         <a class="nav-link" href="{% url 'webapp:create_task' %}">Новая задача</a>
+        {% endif %}
     </li>
 
     <li class="nav-item">
+        {% if perms.webapp.delete_task or projecttask.user == request.user %}
         <a class="nav-link" href="{% url 'webapp:task_delete' task.pk %}">Удалить</a>
+        {% endif %}
     </li>
     {% endif %}
 {% endblock %}
@@ -21,7 +25,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text" style="white-space: pre-wrap">Подродное описание: {{ task.description }}</p>
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated and perms.webapp.delete_task or projecttask.user == request.user %}
                 <a href="{% url 'webapp:task_update' task.pk %}" class="btn btn-primary">Обновление</a>
                 {% endif %}
             </div>
