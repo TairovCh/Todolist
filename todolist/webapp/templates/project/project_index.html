@@ -14,16 +14,5 @@
 
 
     {% block content %}
-    <h1>Проекты</h1>
-    <div class="row">
-        {% for project in projects %}
-            <div class="col-auto">
-                <div class="card col">
-                    <h5 class="card-header">Название: <a href="{% url 'webapp:project_view' project.pk %}">{{ project.name }}</a></h5>
-                    <p>Дата создание: {{project.start_date}}</p>
-                    <p>Дата окончания: {{project.end_date|default:'-'}}</p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>  
+        {% include 'partial/project_partial.html' %}
     {% endblock %}
