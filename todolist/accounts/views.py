@@ -1,11 +1,11 @@
 from django.shortcuts import redirect
 from django.contrib.auth import login
 from accounts.forms import MyUserCreationForm
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse
 from accounts.models import Profile
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.list import MultipleObjectMixin
 
 # Create your views here.
@@ -43,4 +43,10 @@ class UserDetailView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
 
 
 
+class UsersView(PermissionRequiredMixin, ListView):
+    template_name = 'users.html'
+    context_object_name = 'users_list'
+    model = get_user_model() 
+    paginate_by = 3
+    permission_required = 'accounts.view_profile'
 

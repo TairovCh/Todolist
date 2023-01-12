@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+<ul class="list-group">
+    {% if perms.accounts.view_profile %}
+    {% for user in users_list %}
+
+        <li class="list-group-item"><a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a></li>
+
+    {% endfor %}
+    {% endif %}
+</ul>
+{% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+{% endif %}
+{% endblock %}
+
+
+{% url 'accounts:detail' user.pk %}
