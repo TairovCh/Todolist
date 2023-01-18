@@ -42,7 +42,7 @@
             <p class="card-text" style="white-space: pre-wrap">Описание: {{ projecttask.description }}</p>
 
             <p class="card-text">Пользователи: {% for user in projecttask.user.all %}
-                {{user.username}} {% if not forloop.last %},{% endif%}
+                <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>{% if not forloop.last %},{% endif%}
                 {% endfor %}</p>
             {% if perms.webapp.change_projecttask %}
                 <a href="{% url 'webapp:project_update' projecttask.pk %}" class="btn btn-primary">Update</a>
